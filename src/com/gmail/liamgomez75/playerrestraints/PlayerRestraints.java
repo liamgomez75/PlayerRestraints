@@ -7,6 +7,8 @@
 package com.gmail.liamgomez75.playerrestraints;
 
 import com.gmail.liamgomez75.playerrestraints.listeners.RestraintListener;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -19,4 +21,34 @@ public class PlayerRestraints extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new RestraintListener(this), this);
         saveDefaultConfig();
     }
+    
+    @Override
+    public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
+        if (cmd.getName().equalsIgnoreCase("pRestraint")) {
+            if(args.length > 0) {
+                if ((args[0].equalsIgnoreCase("reload"))) {
+                    return reload(sender);
+                }
+            }
+        }
+        return false;
+    }
+    
+    public boolean reload(CommandSender sender) {
+        if (sender.hasPermission("pRestraint.admin")) {
+            
+            reloadConfig();
+            
+            sender.sendMessage("§dConfig Reloaded.");
+        
+        } else {
+            
+            sender.sendMessage("§cYou do not have permission to do this.");
+        
+        }
+        
+        return true;
+    
+    }
 }
+
