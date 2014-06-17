@@ -1,7 +1,7 @@
 
 name: PlayerRestraints
 main: com.gmail.liamgomez75.playerrestraints.PlayerRestraints
-version: 1.0.1
+version: 1.0.3
 
 commands:
     prestraint:
