@@ -1,0 +1,20 @@
+
+name: PlayerRestraints
+main: com.gmail.liamgomez75.playerrestraints.PlayerRestraints
+version: 1.0.0
+
+commands:
+    prestraint:
+        description: configure settings in the plugin!
+        aliases: [prest]
+        usage: /prestraint reload
+permissions:
+    prestraint.*:
+        description: Gives access to all commands
+        default: false
+        children:
+            pRestraint.canRestrain: true
+            pRestraint.canFree: true
+            pRestraint.canCarry: true
+            pRestraint.immune: true
+            pRestraint.admin: true
