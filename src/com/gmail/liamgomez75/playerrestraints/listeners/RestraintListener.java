@@ -20,6 +20,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.event.vehicle.VehicleExitEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 
 /**
  *
@@ -95,8 +96,7 @@ public class RestraintListener implements Listener {
     public void onPlayerMoveEvent(PlayerMoveEvent e) {
         Player player = e.getPlayer();
         if(ConfigUtils.isRestrained(player, plugin)) {
-            player.sendMessage("§7You can't do that while tied up!");
-            e.setCancelled(true);
+            player.setVelocity(new Vector().zero());
         } else if(player.isSneaking()) {
             player.eject();
         }
