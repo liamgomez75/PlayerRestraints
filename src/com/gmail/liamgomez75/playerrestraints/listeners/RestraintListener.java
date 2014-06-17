@@ -16,6 +16,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.event.vehicle.VehicleExitEvent;
 import org.bukkit.inventory.ItemStack;
@@ -62,7 +63,7 @@ public class RestraintListener implements Listener {
                     ConfigUtils.setPlayerRestrained(restrainedPlayer, false, plugin);
                     player.sendMessage("§7You have freed " + restrainedPlayer.getName() + ".");
                     restrainedPlayer.sendMessage("§7" + player.getName() + " has set you free.");
-                } else if(player.getItemInHand().getType() == null && player.hasPermission("pRestraint.canCarry") && ConfigUtils.isRestrained(restrainedPlayer, plugin)) {
+                } else if(player.getItemInHand().getType() == Material.AIR && player.hasPermission("pRestraint.canCarry") && ConfigUtils.isRestrained(restrainedPlayer, plugin)) {
                     player.setPassenger(restrainedPlayer);
                 }
             }
@@ -89,15 +90,16 @@ public class RestraintListener implements Listener {
         }
     }
     
+    
     @EventHandler
-    public void onPlayerToggleSneakEvent(PlayerToggleSneakEvent e) {
+    public void onPlayerMoveEvent(PlayerMoveEvent e) {
         Player player = e.getPlayer();
         if(ConfigUtils.isRestrained(player, plugin)) {
+            player.sendMessage("§7You can't do that while tied up!");
             e.setCancelled(true);
         } else if(player.isSneaking()) {
-            player.setPassenger(null);
+            player.eject();
         }
-        
     }
     
     
