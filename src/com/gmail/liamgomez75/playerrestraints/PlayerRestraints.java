@@ -6,6 +6,7 @@
 
 package com.gmail.liamgomez75.playerrestraints;
 
+import com.gmail.liamgomez75.playerrestraints.listeners.RestraintListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -13,7 +14,9 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @author Liam Gomez<liamgomez75@gmail.com>
  */
 public class PlayerRestraints extends JavaPlugin {
+    @Override
     public void onEnable() {
         getServer().getPluginManager().registerEvents(new RestraintListener(this), this);
+        saveDefaultConfig();
     }
 }
