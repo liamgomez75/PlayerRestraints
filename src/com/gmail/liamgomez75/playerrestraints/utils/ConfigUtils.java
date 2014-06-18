@@ -24,11 +24,6 @@ public abstract class ConfigUtils {
         final String path = "Users." + playerID.toString() + "." + RESTRAINED_CONFIG_STRING;
         plugin.getConfig().set(path, restrained);
         plugin.saveConfig();
-        if(isRestrained(player, plugin)) {
-            player.setDisplayName(ChatColor.GOLD + player.getName() + " (Tied up)");
-        } else {
-            player.setDisplayName(player.getName());
-        }
     }
     
     /**
