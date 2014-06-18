@@ -13,6 +13,12 @@ import org.bukkit.plugin.Plugin;
 public abstract class ConfigUtils {
     public static final String RESTRAINED_CONFIG_STRING = "Restrained";
     
+    /**
+     * 
+     * @param player The player that is being restrained or set free
+     * @param restrained Value to change whether or not the player is free or restrained
+     * @param plugin The plugin that controls the config for storing values
+     */
     public static void setPlayerRestrained(Player player, Boolean restrained, Plugin plugin) {
         UUID playerID = player.getUniqueId();
         final String path = "Users." + playerID.toString() + "." + RESTRAINED_CONFIG_STRING;
@@ -25,12 +31,23 @@ public abstract class ConfigUtils {
         }
     }
     
+    /**
+     * 
+     * @param player The player that is being checked to see if they are restrained
+     * @param plugin The plugin that stores and controls the config values
+     * @return  returns if the player is either restrained or free with a true or false value that is stored in the config
+     */
     public static boolean isRestrained(Player player, Plugin plugin) {
         UUID playerID = player.getUniqueId();
         final String path = "Users." + playerID.toString() + "." + RESTRAINED_CONFIG_STRING;
         return plugin.getConfig().getBoolean(path);
     }
     
+    /**
+     * 
+     * @param player The player that is having their name stored in the config
+     * @param plugin The plugin that controls and stores information into the config
+     */
     public static void setPlayerName(Player player, Plugin plugin) {
         UUID playerID = player.getUniqueId();
         final String NAME = player.getName();
