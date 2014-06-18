@@ -1,12 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package com.gmail.liamgomez75.playerrestraints;
 
 import com.gmail.liamgomez75.playerrestraints.listeners.RestraintListener;
+import com.gmail.liamgomez75.playerrestraints.listeners.TagListener;
+import com.gmail.liamgomez75.playerrestraints.utils.TagUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -19,6 +16,11 @@ public class PlayerRestraints extends JavaPlugin {
     @Override
     public void onEnable() {
         getServer().getPluginManager().registerEvents(new RestraintListener(this), this);
+        if (TagUtils.isEnabled(this)) {
+            getServer().getPluginManager().registerEvents(new TagListener(this), this);
+        } else {
+            this.getLogger().warning("TagAPI not found - No changes to player tags will be made");
+        }
         saveDefaultConfig();
     }
     
